@@ -10,6 +10,24 @@ import Loader from '../components/Loader';
 import Error from '../components/Error';
 import Button from '../components/Button';
 
+/**
+ * Dashboard Component
+ * 
+ * Main dashboard page that displays:
+ * - Dashboard statistics cards
+ * - Invoice action buttons
+ * - Recent invoices list
+ * - Recent activities list
+ * - Invoice details modal
+ * 
+ * Features:
+ * - Responsive design for all screen sizes
+ * - Loading states and error handling
+ * - Modal-based invoice details view
+ * - Real-time data fetching
+ * 
+ * @returns {JSX.Element} Dashboard component
+ */
 const Dashboard: React.FC = () => {
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -23,6 +41,11 @@ const Dashboard: React.FC = () => {
         fetchDashboardData();
     }, []);
 
+    /**
+     * Fetches dashboard data from the API
+     * Includes statistics, invoices, and activities
+     * Handles loading states and errors
+     */
     const fetchDashboardData = async () => {
         try {
             setLoading(true);
@@ -56,15 +79,25 @@ const Dashboard: React.FC = () => {
         }
     };
 
+    /**
+     * Handles retry action when data fetching fails
+     */
     const handleRetry = () => {
         fetchDashboardData();
     };
 
+    /**
+     * Handles invoice click to open details modal
+     * @param {string} invoiceId - The ID of the clicked invoice
+     */
     const handleInvoiceClick = (invoiceId: string) => {
         setSelectedInvoiceId(invoiceId);
         setIsModalOpen(true);
     };
 
+    /**
+     * Handles closing the invoice details modal
+     */
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setSelectedInvoiceId(null);
@@ -93,13 +126,13 @@ const Dashboard: React.FC = () => {
 
     return (
         <div className="h-full bg-gray-50 overflow-y-auto">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+            <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-3 sm:py-4 lg:py-6 xl:py-8">
                 {/* Dashboard Cards */}
-                <div className='flex items-center justify-between mb-6'>
-                    <h2 className='text-2xl font-medium text-gray-900'>Invoice</h2>
-                    <div className='flex items-center gap-4'>
-                        <Button size='lg' className='uppercase text-[10px] px-10 py-4 bg-white text-gray-400' text='see what’s new' />
-                        <Button size='lg' className='uppercase text-[10px] px-10 py-4 bg-[#003EFF] text-white hover:text-white' text='create' />
+                <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 gap-3 sm:gap-4'>
+                    <h2 className='text-xl sm:text-2xl font-medium text-gray-900'>Invoice</h2>
+                    <div className='flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4'>
+                        <Button size='lg' className='uppercase text-[10px] px-6 sm:px-10 py-3 sm:py-4 bg-white text-gray-400' text="see what's new" />
+                        <Button size='lg' className='uppercase text-[10px] px-6 sm:px-10 py-3 sm:py-4 bg-[#003EFF] text-white hover:text-white' text='create' />
                     </div>
                 </div>
                 {stats && <DashboardCards stats={stats} />}
@@ -108,7 +141,7 @@ const Dashboard: React.FC = () => {
                 <InvoiceActions />
 
                 {/* Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                     {/* Recent Invoices */}
                     <div className="lg:col-span-1">
                         <InvoiceList invoices={invoices} onInvoiceClick={handleInvoiceClick} />

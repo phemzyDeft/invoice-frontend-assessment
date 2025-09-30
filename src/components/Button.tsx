@@ -1,14 +1,30 @@
 import React from 'react';
 
+/**
+ * Button component props interface
+ */
 interface ButtonProps {
+  /** Click handler function */
   onClick?: () => void;
+  /** Button text content */
   text?: string;
+  /** Additional CSS classes */
   className?: string;
+  /** Button size variant */
   size?: 'sm' | 'md' | 'lg';
 }
 
-const Button: React.FC<ButtonProps> = ({ 
-  onClick, 
+/**
+ * Reusable Button Component
+ * 
+ * A flexible button component with multiple size variants and customizable styling.
+ * Designed for consistent UI across the application.
+ * 
+ * @param {ButtonProps} props - Component props
+ * @returns {JSX.Element} Button component
+ */
+const Button: React.FC<ButtonProps> = ({
+  onClick,
   text = "VIEW ALL",
   className = "",
   size = 'md'

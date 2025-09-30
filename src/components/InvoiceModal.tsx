@@ -5,12 +5,34 @@ import InvoiceDetails from './InvoiceDetails';
 import Loader from './Loader';
 import Error from './Error';
 
+/**
+ * Invoice Modal component props interface
+ */
 interface InvoiceModalProps {
+  /** ID of the invoice to display */
   invoiceId: string | null;
+  /** Whether the modal is open */
   isOpen: boolean;
+  /** Function to call when closing the modal */
   onClose: () => void;
 }
 
+/**
+ * Invoice Modal Component
+ * 
+ * Displays invoice details in a modal overlay. Fetches invoice data
+ * and related activities when opened.
+ * 
+ * Features:
+ * - Responsive modal design
+ * - Loading states during data fetch
+ * - Error handling with retry functionality
+ * - Click outside to close
+ * - Escape key to close
+ * 
+ * @param {InvoiceModalProps} props - Component props
+ * @returns {JSX.Element | null} Modal component or null if not open
+ */
 const InvoiceModal: React.FC<InvoiceModalProps> = ({ invoiceId, isOpen, onClose }) => {
   const [invoice, setInvoice] = useState<Invoice | null>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -23,6 +45,10 @@ const InvoiceModal: React.FC<InvoiceModalProps> = ({ invoiceId, isOpen, onClose 
     }
   }, [isOpen, invoiceId]);
 
+  /**
+   * Fetches invoice details and related activities
+   * @param {string} id - The invoice ID to fetch
+   */
   const fetchInvoiceData = async (id: string) => {
     try {
       setLoading(true);

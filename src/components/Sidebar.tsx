@@ -12,12 +12,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   const menuItems = [
     { path: '/', icon: '/icons/home.svg', label: 'Getting Started' },
-    { path: '/dashboard', icon: '/icons/overview.svg', label: 'Overview' },
-    { path: '/accounts', icon: '/icons/home.svg', label: 'Accounts' },
+    { path: '/', icon: '/icons/overview.svg', label: 'Overview' },
+    { path: '/', icon: '/icons/home.svg', label: 'Accounts' },
     { path: '/invoices', icon: '/icons/invoice.svg', label: 'Invoice' },
-    { path: '/beneficiaries', icon: '/icons/beneficiary.svg', label: 'Beneficiary Management' },
-    { path: '/help', icon: '/icons/help.svg', label: 'Help Center' },
-    { path: '/settings', icon: '/icons/settings.svg', label: 'Settings' }
+    { path: '/', icon: '/icons/beneficiary.svg', label: 'Beneficiary Management' },
+    { path: '/', icon: '/icons/help.svg', label: 'Help Center' },
+    { path: '/', icon: '/icons/settings.svg', label: 'Settings' }
   ];
 
   const handleNavigation = (path: string) => {
