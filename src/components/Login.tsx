@@ -9,27 +9,24 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login, googleSignIn } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setIsLoading(true);
 
     try {
       await login(email, password);
     } catch (error: any) {
       // Error handling is now done in AuthContext with toast notifications
-      setError(''); // Clear any local error state
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleGoogleSignIn = async () => {
-    setError('');
     setIsLoading(true);
 
     try {
